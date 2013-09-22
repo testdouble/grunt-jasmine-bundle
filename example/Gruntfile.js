@@ -4,7 +4,7 @@ require('coffee-script')
 module.exports = function(grunt) {
   grunt.initConfig({
     spec: {
-      foo: {
+      all: {
         minijasminenode: {
           showColors: true
         }
