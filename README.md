@@ -26,6 +26,8 @@ Check out [the included example project](https://github.com/testdouble/grunt-jas
 No configuration is necessary if the defaults work for you. A simple config might be as small as this, however:
 
 ```
+grunt.loadNpmTasks("grunt-jasmine-bundle")
+
 grunt.initConfig({
   spec: {
     unit: {
