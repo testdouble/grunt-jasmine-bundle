@@ -1,0 +1,15 @@
+{
+  "name": "grunt-jasmine-bundle-example",
+  "private": true,
+  "title": "An example using grunt-jasmine-bundle",
+  "version": "0.0.1",
+  "author": {
+    "name": "Justin Searls",
+    "company": "Test Double",
+    "email": "justin@testdouble.com"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-jasmine-bundle": ">= 0.0.1"
+  }
+}
