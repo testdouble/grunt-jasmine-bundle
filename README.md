@@ -28,7 +28,7 @@ No configuration is necessary if the defaults work for you. A simple config migh
 ```
 grunt.initConfig({
   spec: {
-    all: {
+    unit: {
       minijasminenode: {
         showColors: true
       }
