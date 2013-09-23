@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/testdouble/grunt-jasmine-bundle.png)](https://travis-ci.org/testdouble/grunt-jasmine-bundle)
 
-An opinionated little grunt task for running Jasmine specs of JavaScript/CoffeeScript written to run under Node.js.
+An opinionated little[grunt](http://gruntjs.com) task for running Jasmine specs of JavaScript/CoffeeScript written to run under Node.js.
 
 It delegates to [minijasminenode](https://github.com/juliemr/minijasminenode) and includes the following goodies without you even asking:
 
