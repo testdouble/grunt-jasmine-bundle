@@ -5,8 +5,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     spec: {
       unit: {
-        minijasminenode: {
-          showColors: true
+        options: {
+          minijasminenode: {
+            showColors: true
+          }
         }
       }
     }
