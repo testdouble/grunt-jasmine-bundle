@@ -17,7 +17,10 @@ module.exports = (grunt) ->
         onComplete: (runner, log) ->
           done(runner.results().failedCount == 0)
 
-    options.minijasminenode.specs = grunt.file.expand(options.helpers).concat(grunt.file.expand(options.specs))
+    options.minijasminenode.specs = grunt.file.expand(
+      grunt.file.expand(options.helpers)
+        .concat(grunt.file.expand(options.specs))
+    )
 
     jasmine = require("minijasminenode")
     #duck-punch the heck out of global jasmine:
