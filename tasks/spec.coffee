@@ -10,6 +10,15 @@ module.exports = (grunt) ->
   grunt.registerMultiTask "spec", "run unit specs with Jasmine", (target) ->
     done = @async()
 
+    options = @options
+      helpers: "spec/helpers/**/*.{js,coffee}"
+      specs: "spec/**/*.{js,coffee}"
+      minijasminenode:
+        onComplete: (runner, log) ->
+          done(runner.results().failedCount == 0)
+
+    options.minijasminenode.specs = grunt.file.expand(options.helpers).concat(grunt.file.expand(options.specs))
+
     jasmine = require("minijasminenode")
     #duck-punch the heck out of global jasmine:
     global.context = global.describe
@@ -19,12 +28,7 @@ module.exports = (grunt) ->
     require("jasmine-before-all")
     require("jasmine-stealth")
 
-    defaultConfig =
-      specs: grunt.file.expand(@data.helpers || "spec/helpers/**/*.{js,coffee}").concat(grunt.file.expand(@data.specs || "spec/**/*.{js,coffee}"))
-      onComplete: (runner, log) ->
-        done(runner.results().failedCount == 0)
-
-    jasmine.executeSpecs(_({}).extend(defaultConfig, @data.minijasminenode))
+    jasmine.executeSpecs options.minijasminenode
 
   # because this is a multi-task, it's necessary to have a default task defined
   grunt.config("spec", default: {}) unless grunt.config("spec")?
