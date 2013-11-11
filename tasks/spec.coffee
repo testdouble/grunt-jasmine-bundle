@@ -6,7 +6,7 @@
 #   minijasminenode - {} - an object to set or override any options to minijasmine node. See options here: https://github.com/juliemr/minijasminenode#usage
 
 module.exports = (grunt) ->
-  _ = grunt.util._
+  _ = require("lodash")
 
   extractDeprecatedOptions = (data) ->
     _(data).chain()
