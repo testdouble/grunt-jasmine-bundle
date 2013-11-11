@@ -4,8 +4,15 @@
 #   helpers - "spec/helpers/**/*.{js,coffee}" - a glob (or array of globs) to your spec helpers
 #   specs - "spec/**/*.{js,coffee}" - a glob (or array of globs) to your specs
 #   minijasminenode - {} - an object to set or override any options to minijasmine node. See options here: https://github.com/juliemr/minijasminenode#usage
+
 module.exports = (grunt) ->
   _ = grunt.util._
+
+  extractDeprecatedOptions = (data) ->
+    _(data).chain()
+      .pick('specs', 'helpers', 'minijasminenode')
+      .each((value,option) -> grunt.log.writeln "Specifying '#{option}' directly on a target is deprecated. Please use `options.#{option}` instead." )
+      .value()
 
   grunt.registerMultiTask "spec", "run unit specs with Jasmine", (target) ->
     done = @async()
@@ -16,6 +23,8 @@ module.exports = (grunt) ->
       minijasminenode:
         onComplete: (runner, log) ->
           done(runner.results().failedCount == 0)
+
+    _(options).extend extractDeprecatedOptions(@data)
 
     options.minijasminenode.specs = grunt.file.expand(
       grunt.file.expand(options.helpers)
@@ -35,4 +44,3 @@ module.exports = (grunt) ->
 
   # because this is a multi-task, it's necessary to have a default task defined
   grunt.config("spec", default: {}) unless grunt.config("spec")?
-
