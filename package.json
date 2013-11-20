@@ -14,7 +14,7 @@
   "dependencies": {
     "grunt": "~0.4.1",
     "minijasminenode": "~0.2.4",
-    "jasmine-given": "~2.4.0",
+    "jasmine-given": "~2.5.0",
     "jasmine-only": "~0.1.0",
     "jasmine-before-all": "~0.0.2",
     "jasmine-stealth": "~0.0.13",
