@@ -1,7 +1,7 @@
 {
   "name": "grunt-jasmine-bundle",
   "title": "An opinionated grunt task for running specs of node code with Jasmine (and helpers)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Justin Searls",
     "company": "Test Double",
