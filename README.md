@@ -25,14 +25,16 @@ Check out [the included example project](https://github.com/testdouble/grunt-jas
 
 No configuration is necessary if the defaults work for you. A simple config might be as small as this, however:
 
-```
+```javascript
 grunt.loadNpmTasks("grunt-jasmine-bundle")
 
 grunt.initConfig({
   spec: {
     unit: {
-      minijasminenode: {
-        showColors: true
+      options: {
+        minijasminenode: {
+          showColors: true
+        }
       }
     }
   }
@@ -52,12 +54,16 @@ grunt.initConfig({
       }
     },
     unit: {
-      helpers: ["shared/helpers/**/*.{js,coffee}", "test/helpers/**/*.{js,coffee}"],
-      specs: "test/**/*.{js,coffee}"
+      options: {
+        helpers: ["shared/helpers/**/*.{js,coffee}", "test/helpers/**/*.{js,coffee}"],
+        specs: "test/**/*.{js,coffee}"
+      }
     },
     e2e: {
-      helpers: ["shared/helpers/**/*.{js,coffee}", "e2e/helpers/**/*.{js,coffee}"],
-      specs: "e2e/**/*.{js,coffee}"
+      options: {
+        helpers: ["shared/helpers/**/*.{js,coffee}", "e2e/helpers/**/*.{js,coffee}"],
+        specs: "e2e/**/*.{js,coffee}"
+      }
     }
   }
 });
