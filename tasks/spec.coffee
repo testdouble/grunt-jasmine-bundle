@@ -8,28 +8,18 @@
 module.exports = (grunt) ->
   _ = grunt.util._
 
-  extractDeprecatedOptions = (data) ->
-    _(data).chain()
-      .pick('specs', 'helpers', 'minijasminenode')
-      .each((value,option) -> grunt.log.writeln "Specifying '#{option}' directly on a target is deprecated. Please use `options.#{option}` instead." )
-      .value()
-
   grunt.registerMultiTask "spec", "run unit specs with Jasmine", (target) ->
     done = @async()
 
-    options = @options
-      helpers: "spec/helpers/**/*.{js,coffee}"
-      specs: "spec/**/*.{js,coffee}"
-      minijasminenode:
-        onComplete: (runner, log) ->
-          done(runner.results().failedCount == 0)
-
-    _(options).extend extractDeprecatedOptions(@data)
-
-    options.minijasminenode.specs = grunt.file.expand(
-      grunt.file.expand(options.helpers)
-        .concat(grunt.file.expand(options.specs))
-    )
+    options = _ @options
+        helpers: "spec/helpers/**/*.{js,coffee}"
+        specs: "spec/**/*.{js,coffee}"
+        minijasminenode: {}
+      .chain()
+      .extend(extractDeprecatedOptions(@data))
+      .tap(userOnCompleteWrapper(done))
+      .tap(expandSpecFiles)
+      .value()
 
     jasmine = require("minijasminenode")
     #duck-punch the heck out of global jasmine:
@@ -40,7 +30,23 @@ module.exports = (grunt) ->
     require("jasmine-before-all")
     require("jasmine-stealth")
 
-    jasmine.executeSpecs options.minijasminenode
+    jasmine.executeSpecs(options.minijasminenode)
+
+  extractDeprecatedOptions = (data) ->
+    _(data).chain()
+      .pick('specs', 'helpers', 'minijasminenode')
+      .each((value,option) -> grunt.log.writeln "Specifying '#{option}' directly on a target is deprecated. Please use `options.#{option}` instead." )
+      .value()
+
+  userOnCompleteWrapper = (done) ->
+    (options) ->
+      userOnComplete = options.minijasminenode.onComplete
+      options.minijasminenode.onComplete = (runner, log) ->
+        userOnComplete?(runner, log)
+        done(runner.results().failedCount == 0)
+
+  expandSpecFiles = (options) ->
+    options.minijasminenode.specs = grunt.file.expand([].concat(options.helpers, options.specs))
 
   # because this is a multi-task, it's necessary to have a default task defined
   grunt.config("spec", default: {}) unless grunt.config("spec")?
