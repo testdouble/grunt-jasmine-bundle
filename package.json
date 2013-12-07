@@ -23,6 +23,7 @@
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
+  "main": "index.js",
   "keywords": [
     "jasmine",
     "jasmine-given",
