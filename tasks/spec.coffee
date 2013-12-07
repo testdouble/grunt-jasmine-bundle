@@ -11,11 +11,11 @@ module.exports = (grunt) ->
   grunt.registerMultiTask "spec", "run unit specs with Jasmine", (target) ->
     done = @async()
 
-    options = _ @options
+    options = _(@options
         helpers: "spec/helpers/**/*.{js,coffee}"
         specs: "spec/**/*.{js,coffee}"
         minijasminenode: {}
-      .chain()
+      ).chain()
       .extend(extractDeprecatedOptions(@data))
       .tap(userOnCompleteWrapper(done))
       .tap(expandSpecFiles)
