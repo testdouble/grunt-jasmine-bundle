@@ -21,7 +21,7 @@
     "coffee-script": "~1.6.3"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": ">=0.4.1"
   },
   "main": "index.js",
   "keywords": [
