@@ -14,7 +14,7 @@ It delegates to [minijasminenode](https://github.com/juliemr/minijasminenode) an
 
 ## Usage
 
-Check out [the included example project](https://github.com/testdouble/grunt-jasmine-bundle/tree/master/example) for a minimal realistic usage.
+Check out [the included example project](https://github.com/testdouble/grunt-jasmine-bundle/tree/main/example) for a minimal realistic usage.
 
 
 ## Options
